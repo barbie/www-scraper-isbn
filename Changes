@@ -4,6 +4,7 @@ Revision history for Perl distribution WWW::Scraper::ISBN
         - New Maintainer: Barbie.
         - move module into lib directory structure.
         - change file dates changed to meet W3CDTF standards.
+        - reworked Makefile.PL for clarity.
 
 0.25    2005-05-01
         - Made a number of changes to the documentation to correct errors,
