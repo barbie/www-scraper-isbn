@@ -1,7 +1,7 @@
 Changes
-ISBN.pm
+lib/WWW/Scraper/ISBN.pm
 Makefile.PL
 MANIFEST
 README
 t/1.t
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml
