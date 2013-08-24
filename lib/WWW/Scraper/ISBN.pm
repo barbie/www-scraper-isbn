@@ -48,7 +48,8 @@ sub search {
 	if( $self->drivers == 0 ) {
 		croak("No search drivers specified.\n");
 	}
-	my $record = WWW::Scraper::ISBN::Record->new();
+
+    my $record = WWW::Scraper::ISBN::Record->new();
 	$record->isbn($isbn);
 	foreach my $driver_name (@{ $self->{DRIVERS} }) {
 		my $driver = "WWW::Scraper::ISBN::${driver_name}_Driver"->new();
@@ -67,28 +68,33 @@ sub search {
 }
 
 1;
+
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
-WWW::Scraper::ISBN - Perl extension for retrieving information about books (e.g., title, author, etc) from a variety of 
-sources on the internet, by ISBN number.
+WWW::Scraper::ISBN - Retrieve information about books from online sources.
 
 =head1 SYNOPSIS
 
   use WWW::Scraper::ISBN;
+
   my $scraper = WWW::Scraper::ISBN->new();
   $scraper->drivers("Driver1", "Driver2");
+  
   my $isbn = "123456789X";
   my $record = $scraper->search($isbn);
   if($record->found) {
 	print "Book ".$record->isbn." found by driver ".$record->found_in."\n";
 	my $book = $record->book;
-	# do stuff with book hash
-	print $book->{'title'};
+
+    # do stuff with book hash
+	
+    print $book->{'title'};
 	print $book->{'author'};
-  	# etc
+  	
+    # etc
+  
   } else {
 	print $record->error;
   }
@@ -107,11 +113,13 @@ Requires the following modules be installed:
 
 =head1 DESCRIPTION
 
-The WWW::Scraper::ISBN class was built as a way to retrieve information on books from multiple sources 
-easily.  It utilizes at least one driver implemented as a subclass of L<WWW::Scraper::ISBN::Driver>, each of 
-which is designed to scrape from a single source.  Because we found that different sources had different 
-information available on different books, we designed a basic interface that could be implemented in 
-whatever ways necessary to retrieve the desired information.
+The WWW::Scraper::ISBN class was built as a way to retrieve information on 
+books from multiple sources easily. It utilizes at least one driver implemented
+as a subclass of L<WWW::Scraper::ISBN::Driver>, each of which is designed to 
+scrape from a single source.  Because we found that different sources had 
+different information available on different books, we designed a basic 
+interface that could be implemented in whatever ways necessary to retrieve 
+the desired information.
 
 =head2 EXPORT
 
@@ -123,17 +131,19 @@ None by default.
 
 =item C<new()>
 
-Class constructor.  Returns a reference to an empty scraper object.  No drivers by default
+Class constructor.  Returns a reference to an empty scraper object.  No 
+drivers by default
 
 =item C<drivers() or drivers($DRIVER1, $DRIVER2)>
 
-   foreach my $driver ( $scraper->drivers() ) { ... }
+  foreach my $driver ( $scraper->drivers() ) { ... }
 
-   $scraper->drivers("DRIVER1", "DRIVER2");
+  $scraper->drivers("DRIVER1", "DRIVER2");
 
-Accessor/Mutator method which handles the drivers that this instance of the WWW::Scraper::ISBN class 
-should utilize.  The appropriate driver module must be installed (e.g. WWW::Scraper::ISBN::DRIVER1_Driver 
-for "DRIVER1", etc.).  The order of arguments determines the order in which the drivers will be searched.
+Accessor/Mutator method which handles the drivers that this instance of the 
+WWW::Scraper::ISBN class should utilize.  The appropriate driver module must be
+installed (e.g. WWW::Scraper::ISBN::DRIVER1_Driver for "DRIVER1", etc.).  The 
+order of arguments determines the order in which the drivers will be searched.
 
 When this method is called, it loads the specified drivers using 'require'.
 
@@ -141,49 +151,52 @@ Must be set before C<search()> method is called.
 
 =item C<reset_drivers>
 
-   $scraper->reset_drivers;
+  $scraper->reset_drivers;
 
-Sets the list of drivers to an empty array.  Will disable search feature until a new driver is specified.
+Sets the list of drivers to an empty array.  Will disable search feature until
+a new driver is specified.
 
 =item C<search($isbn)>
 
-   my $record = $scraper->search("123456789X");
+  my $record = $scraper->search("123456789X");
 
-Searches for information on the given ISBN number.  It goes through the drivers in the order they are 
-specified, stopping when the book is found or all drivers are exhausted.  It returns a 
-L<WWW::Scraper::ISBN::Record> object, which will have its C<found()> field set according to whether or not the 
-search was successful.
+Searches for information on the given ISBN number.  It goes through the drivers
+in the order they are specified, stopping when the book is found or all drivers
+are exhausted.  It returns a L<WWW::Scraper::ISBN::Record> object, which will 
+have its C<found()> field set according to whether or not the search was 
+successful.
 
-If you have L<Business::ISBN> installed, the method will attempt to validate the given isbn.
+If you have L<Business::ISBN> installed, the method will attempt to validate 
+the given isbn.
 
 =back
 
 =head1 CODE EXAMPLE
 
-    use WWW::Scraper::ISBN;
+  use WWW::Scraper::ISBN;
 
-    # instantiate the object
-    my $scraper = WWW::Scraper::ISBN->new();
+  # instantiate the object
+  my $scraper = WWW::Scraper::ISBN->new();
 
-    # load the drivers.  requires that 
-    #	WWW::Scraper::ISBN::LOC_Driver and
-    #	WWW::Scraper::ISBN::ISBNnu_Driver 
-    # be installed
-    $scraper->drivers("LOC", "ISBNnu"); 
+  # load the drivers.  requires that 
+  #	WWW::Scraper::ISBN::LOC_Driver and
+  #	WWW::Scraper::ISBN::ISBNnu_Driver 
+  # be installed
+  $scraper->drivers("LOC", "ISBNnu"); 
 
-    @isbns = [ "123456789X", "132457689X", "987654321X" ];
+  @isbns = [ "123456789X", "132457689X", "987654321X" ];
 
-    foreach my $num (@isbns) {
-        $scraper->isbn($num);
-        $scraper->search($scraper->isbn);
-        if ($scraper->found) {
-                my $b = $scraper->book;
-                print "Title: ".$b->{'title'}."\n";
-                print "Author: ".$b->{'author'}."\n\n";
-        } else {
-                print "Book: ".$scraper->isbn." not found.\n\n";
-        }
+  foreach my $num (@isbns) {
+    $scraper->isbn($num);
+    $scraper->search($scraper->isbn);
+    if ($scraper->found) {
+      my $b = $scraper->book;
+      print "Title: ".$b->{'title'}."\n";
+      print "Author: ".$b->{'author'}."\n\n";
+    } else {
+      print "Book: ".$scraper->isbn." not found.\n\n";
     }
+  }
 
 =head1 SEE ALSO
 
@@ -193,19 +206,19 @@ If you have L<Business::ISBN> installed, the method will attempt to validate the
 
 =item L<WWW::Scraper::ISBN::Record>
 
-No mailing list or website currently available.  Primary development done through CSX ( L<http://csx.calvin.edu/> )
-
 =back
 
 =head1 AUTHOR
 
-Andy Schamp, E<lt>andy@schamp.netE<gt>
+  2004-2013 Andy Schamp, E<lt>andy@schamp.netE<gt>
+  2013      Barbie, E<lt>barbie@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004 by Andy Schamp
+  Copyright 2004-2013 by Andy Schamp
+  Copyright 2013 by Barbie
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+  This distribution is free software; you can redistribute it and/or
+  modify it under the Artistic Licence v2.
 
 =cut
