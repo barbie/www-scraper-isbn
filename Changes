@@ -6,6 +6,7 @@ Revision history for Perl distribution WWW::Scraper::ISBN
         - change file dates changed to meet W3CDTF standards.
         - reworked Makefile.PL for clarity.
         - added META.json and updated META.yml.
+        - extended test suite.
 
 0.25    2005-05-01
         - Made a number of changes to the documentation to correct errors,
