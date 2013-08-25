@@ -7,6 +7,7 @@ Revision history for Perl distribution WWW::Scraper::ISBN
         - reworked Makefile.PL for clarity.
         - added META.json and updated META.yml.
         - extended test suite.
+        - Fixed RT#44792, thanks to Ben Bullock (BKB).
 
 0.25    2005-05-01
         - Made a number of changes to the documentation to correct errors,

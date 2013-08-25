@@ -3,8 +3,8 @@ package WWW::Scraper::ISBN;
 use strict;
 use warnings;
 
-use WWW::Scraper::ISBN::Record;
 use Carp;
+use WWW::Scraper::ISBN::Record;
 
 our $VERSION = '0.25';
 
@@ -42,7 +42,7 @@ sub search {
 	
 	if($business_isbn_loaded) {
 		my $isbn_object = Business::ISBN->new($isbn);
-		croak("Invalid ISBN specified.\n") if (!$isbn_object->is_valid);
+		croak("Invalid ISBN specified.\n") unless($isbn_object && $isbn_object->is_valid);
 	}
 
 	if( $self->drivers == 0 ) {
@@ -120,10 +120,6 @@ scrape from a single source.  Because we found that different sources had
 different information available on different books, we designed a basic 
 interface that could be implemented in whatever ways necessary to retrieve 
 the desired information.
-
-=head2 EXPORT
-
-None by default.
 
 =head1 METHODS
 
