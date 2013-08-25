@@ -12,8 +12,8 @@ my $fh = IO::File->new('Changes','r')   or plan skip_all => "Cannot open Changes
 
 plan 'no_plan';
 
-use CPAN::Testers::Data::Addresses;
-my $version = $CPAN::Testers::Data::Addresses::VERSION;
+use WWW::Scraper::ISBN;
+my $version = $WWW::Scraper::ISBN::VERSION;
 
 my $latest = 0;
 while(<$fh>) {

@@ -14,8 +14,8 @@ plan 'no_plan';
 
 my $meta = meta_spec_ok(undef,undef,@_);
 
-use CPAN::Testers::Data::Addresses;
-my $version = $CPAN::Testers::Data::Addresses::VERSION;
+use WWW::Scraper::ISBN;
+my $version = $WWW::Scraper::ISBN::VERSION;
 
 is($meta->{version},$version,
     'META.yml distribution version matches');

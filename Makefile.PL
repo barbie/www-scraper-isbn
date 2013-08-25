@@ -16,10 +16,10 @@ WriteMakefile(
 
         # runtime prereqs
 		'Carp'                          => 1.0,
-		'WWW::Scraper::ISBN::Record'    => 0.15
+		'WWW::Scraper::ISBN::Record'    => 0.15,
 
         # build/test prereqs
-        'Test::More'                    => '0.70',
+        'Test::More'                    => '0.70'
 
     }
 );

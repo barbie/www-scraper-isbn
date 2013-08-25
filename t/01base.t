@@ -4,5 +4,5 @@ use strict;
 use Test::More tests => 1;
 
 BEGIN {
-	use_ok( 'CPAN::Testers::Data::Addresses' );
+	use_ok( 'WWW::Scraper::ISBN' );
 }
