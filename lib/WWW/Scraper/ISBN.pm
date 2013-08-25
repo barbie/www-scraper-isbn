@@ -6,7 +6,7 @@ use warnings;
 use Carp;
 use WWW::Scraper::ISBN::Record;
 
-our $VERSION = '0.25';
+our $VERSION = '0.26';
 
 eval "use Business::ISBN";
 my $business_isbn_loaded = ! $@;
