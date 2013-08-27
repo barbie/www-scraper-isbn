@@ -15,10 +15,11 @@ WriteMakefile(
     PREREQ_PM           => {
 
         # runtime prereqs
-		'Carp'                          => 1.0,
-		'WWW::Scraper::ISBN::Record'    => 0.15,
+		'Carp'                          => '1.00',
+		'WWW::Scraper::ISBN::Record'    => '0.18',
 
         # build/test prereqs
+        'IO::File'                      => '0',
         'Test::More'                    => '0.70'
 
     }
