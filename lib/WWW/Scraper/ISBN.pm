@@ -15,8 +15,11 @@ my $business_isbn_loaded = ! $@;
 sub new {
     my $proto = shift;
     my $class = ref($proto) || $proto;
-    my $self = {};
-    $self->{DRIVERS} = [];
+
+    my $self = {
+        DRIVERS => []
+    };
+
     bless ($self, $class);
     return $self;
 }
