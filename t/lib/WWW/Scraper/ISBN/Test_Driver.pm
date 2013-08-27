@@ -3,8 +3,8 @@ package WWW::Scraper::ISBN::Test_Driver;
 use base qw(WWW::Scraper::ISBN::Driver);
 
 sub search {
-	my $self = shift;
-	my $isbn = shift;
+    my $self = shift;
+    my $isbn = shift;
 
     if($isbn ne '123456789X') {
         $self->found(0);
@@ -19,8 +19,8 @@ sub search {
     };
 
     $self->book($bk);
-	$self->found(1);
-	return $self->book;
+    $self->found(1);
+    return $self->book;
 }
 
 1;

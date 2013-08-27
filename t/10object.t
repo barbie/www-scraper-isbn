@@ -3,7 +3,7 @@ use strict;
 
 use lib qw(t/lib);
 
-use Test::More tests => 17;
+use Test::More tests => 18;
 use WWW::Scraper::ISBN;
 
 my $scraper = WWW::Scraper::ISBN->new();
@@ -16,12 +16,16 @@ is(@drivers,1);
 is($drivers[0],'Test');
 @drivers = $scraper->reset_drivers();
 is(@drivers,0);
+
+my $isbn = "123456789X";
+my $record;
+eval { $record = $scraper->search($isbn) };
+like($@,qr/No search drivers specified/);
+
 @drivers = $scraper->drivers("Test");
 is(@drivers,1);
 is($drivers[0],'Test');
 
-my $isbn = "123456789X";
-my $record;
 eval { $record = $scraper->search($isbn) };
 is($@,'');
 isa_ok($record,'WWW::Scraper::ISBN::Record');
