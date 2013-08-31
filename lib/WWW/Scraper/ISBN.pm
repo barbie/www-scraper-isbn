@@ -41,7 +41,7 @@ sub reset_drivers {
 
 sub search {
     my ($self,$isbn) = @_;
-    
+
     if($business_isbn_loaded) {
         my $isbn_object = Business::ISBN->new($isbn);
         croak("Invalid ISBN specified.\n") unless($isbn_object && $isbn_object->is_valid);

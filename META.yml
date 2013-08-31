@@ -22,7 +22,7 @@ recommends:
   Test::Pod::Coverage:            0.08
 build_requires:
   IO::File:                       0
-  Test::More:                     0.70
+  Test::More:                     0.88
 
 provides:
   WWW::Scraper::ISBN:
