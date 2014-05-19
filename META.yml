@@ -13,7 +13,7 @@ installdirs:              site
 requires:
   perl:                           5.006
   Carp:                           1.00
-  WWW::Scraper::ISBN::Driver:     0.20
+  WWW::Scraper::ISBN::Driver:     0.22
   WWW::Scraper::ISBN::Record:     0.19
 recommends:
   Test::CPAN::Meta:               0
