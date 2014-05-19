@@ -3,7 +3,7 @@ package WWW::Scraper::ISBN;
 use strict;
 use warnings;
 
-our $VERSION = '0.29';
+our $VERSION = '0.30';
 
 #----------------------------------------------------------------------------
 # Library Modules
