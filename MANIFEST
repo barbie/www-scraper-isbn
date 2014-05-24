@@ -1,5 +1,7 @@
 Changes
 lib/WWW/Scraper/ISBN.pm
+lib/WWW/Scraper/ISBN/Driver.pm
+lib/WWW/Scraper/ISBN/Record.pm
 LICENSE
 Makefile.PL
 MANIFEST
