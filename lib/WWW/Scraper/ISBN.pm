@@ -49,6 +49,8 @@ sub reset_drivers {
 sub search {
     my ($self,$isbn) = @_;
 
+    croak("Invalid ISBN specified [].\n") unless($isbn);        
+
     if($business_isbn_loaded) {
         # Business::ISBN has strong validation algorithms
         my $isbn_object = Business::ISBN->new($isbn);

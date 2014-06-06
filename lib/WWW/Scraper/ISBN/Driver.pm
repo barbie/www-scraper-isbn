@@ -60,7 +60,7 @@ sub handler {
 
 sub convert_to_ean13 {
 	my $self = shift;
-    my $isbn = shift;
+    my $isbn = shift || return;
     my $prefix;
 
     return  unless(length $isbn == 10 || length $isbn == 13);
@@ -91,7 +91,7 @@ sub convert_to_ean13 {
 
 sub convert_to_isbn10 {
 	my $self = shift;
-    my $ean  = shift;
+    my $ean  = shift || return;
     my ($isbn,$isbn10);
 
     return  unless(length $ean == 10 || length $ean == 13);
