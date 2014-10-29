@@ -121,9 +121,10 @@ sub is_valid {
 
     # validate and convert into EAN13 format
     my $ean = $self->convert_to_ean13($isbn);
-    return 0
-        if(!$ean || (length $isbn == 13 && $isbn ne $ean)
-                 || (length $isbn == 10 && $isbn ne $self->convert_to_isbn10($ean)));
+
+    return 0 if(!$ean);
+    return 0 if(length $isbn == 13 && $isbn ne $ean);
+    return 0 if(length $isbn == 10 && $isbn ne $self->convert_to_isbn10($ean));
 
     return 1;
 }
