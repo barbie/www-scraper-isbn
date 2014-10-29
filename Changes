@@ -3,6 +3,7 @@ Revision history for WWW-Scraper-ISBN
 
         - fixed license fields in META.json to be lists.
         - reworked is_valid logic on failure.
+        - extended functional test suite.
 
 1.01    2014-06-12
         - added tests and checks for blank searches.
