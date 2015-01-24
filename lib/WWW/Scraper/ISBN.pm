@@ -12,6 +12,8 @@ use Carp;
 use WWW::Scraper::ISBN::Record;
 use WWW::Scraper::ISBN::Driver;
 
+use Module::Pluggable   search_path => ['WWW::Scraper::ISBN'];
+
 eval "use Business::ISBN";
 my $business_isbn_loaded = ! $@;
 
@@ -31,10 +33,17 @@ sub new {
     return $self;
 }
 
+sub available_drivers {
+    my $self = shift;
+    my @plugins = $self->plugins();
+    my @drivers = map { s/WWW::Scraper::ISBN::// } grep { /_Driver$/ } @plugins;
+    return @drivers;
+}
+
 sub drivers {
     my $self = shift;
     while ($_ = shift) {  push @{$self->{DRIVERS}}, $_; }
-    foreach my $driver ( @{ $self->{DRIVERS} }) {
+    for my $driver ( @{ $self->{DRIVERS} }) {
         require "WWW/Scraper/ISBN/".$driver."_Driver.pm";
     }
     return @{ $self->{DRIVERS} };
@@ -66,7 +75,7 @@ sub search {
 
     my $record = WWW::Scraper::ISBN::Record->new();
     $record->isbn($isbn);
-    foreach my $driver_name (@{ $self->{DRIVERS} }) {
+    for my $driver_name (@{ $self->{DRIVERS} }) {
         my $driver = "WWW::Scraper::ISBN::${driver_name}_Driver"->new();
         $driver->search($record->isbn);
         if ($driver->found) {
@@ -98,6 +107,9 @@ WWW::Scraper::ISBN - Retrieve information about books from online sources.
   my $scraper = WWW::Scraper::ISBN->new();
   $scraper->drivers("Driver1", "Driver2");
   
+  my @drivers = $scraper->available_drivers();
+  $scraper->drivers(@drivers);
+
   my $isbn = "123456789X";
   my $record = $scraper->search($isbn);
   if($record->found) {
@@ -145,6 +157,11 @@ the desired information.
 
 Class constructor.  Returns a reference to an empty scraper object.  No 
 drivers by default
+
+=item C<available_drivers()>
+
+Returns a list of installed drivers, which can be subsequently loaded via the 
+drivers() method.
 
 =item C<drivers() or drivers($DRIVER1, $DRIVER2)>
 
