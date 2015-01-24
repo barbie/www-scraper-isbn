@@ -15,7 +15,8 @@ WriteMakefile(
     PREREQ_PM           => {
 
         # runtime prereqs
-		'Carp'                          => '1.00',
+        'Carp'                          => '1.00',
+        'Module::Pluggable'             => '0',
 
         # build/test prereqs
         'IO::File'                      => '0',

@@ -13,6 +13,7 @@ installdirs:              site
 requires:
   perl:                           5.006
   Carp:                           1.00
+  Module::Pluggable:              0
 recommends:
   Test::CPAN::Meta:               0
   Test::CPAN::Meta::JSON:         0
