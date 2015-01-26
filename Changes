@@ -1,6 +1,7 @@
 Revision history for WWW-Scraper-ISBN
 =====================================
 
+1.03    2015-01-26
         - added 'available_drivers' method.
         - added example script.
 
