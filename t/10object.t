@@ -5,6 +5,7 @@ use lib qw(t/lib);
 
 use Test::More;
 use WWW::Scraper::ISBN;
+use WWW::Scraper::ISBN::Test_Driver;
 
 # Can we create the object?
 
