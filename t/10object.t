@@ -13,6 +13,16 @@ isa_ok($scraper,'WWW::Scraper::ISBN');
 my $scraper2 = $scraper->new();
 isa_ok($scraper2,'WWW::Scraper::ISBN');
 
+# what drivers do we have ?
+
+{
+
+    my @drivers = grep { $_ =~ /Test/ } $scraper->available_drivers();
+    is(@drivers,1,'at least one driver available');
+    is($drivers[0],'Test','Test driver found');
+
+}
+
 # can we handle drivers?
 
 my @drivers = $scraper->drivers("Test");

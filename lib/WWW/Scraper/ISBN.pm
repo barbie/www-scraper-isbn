@@ -36,7 +36,12 @@ sub new {
 sub available_drivers {
     my $self = shift;
     my @plugins = $self->plugins();
-    my @drivers = map { s/WWW::Scraper::ISBN::// } grep { /_Driver$/ } @plugins;
+    my @drivers;
+    for my $plugin (@plugins) {
+        next unless($plugin =~ /_Driver$/);
+        $plugin =~ s/WWW::Scraper::ISBN::(\w+)_Driver/$1/;
+        push @drivers, $plugin;
+    }
     return @drivers;
 }
 
