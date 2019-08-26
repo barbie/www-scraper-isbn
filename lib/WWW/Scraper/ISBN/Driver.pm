@@ -92,17 +92,10 @@ sub convert_to_ean13 {
 sub convert_to_isbn10 {
     my $self = shift;
     my $ean  = shift || return;
-    my ($isbn,$isbn10);
 
     return  unless(length $ean == 10 || length $ean == 13);
-
-    if(length $ean == 13) {
-        return  if($ean !~ /^(?:978|979)(\d{9})\d$/);
-        ($isbn,$isbn10) = ($1,$1);
-    } else {
-        return  if($ean !~ /^(\d{9})[\dX]$/);
-        ($isbn,$isbn10) = ($1,$1);
-    }
+    return  if($ean !~ /^(?:978|979)?(\d{9})[\dX]$/);
+    my ($isbn,$isbn10) = ($1,$1);
 
     my ($csum, $pos, $digit) = (0, 0, 0);
     for ($pos = 9; $pos > 0; $pos--) {
