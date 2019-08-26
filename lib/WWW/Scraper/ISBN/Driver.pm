@@ -15,18 +15,18 @@ use Carp;
 
 # Preloaded methods go here.
 sub new {
-	my $proto = shift;
-	my $class = ref($proto) || $proto;
+    my $proto = shift;
+    my $class = ref($proto) || $proto;
 
     my $self = {
-	    FOUND       => 0,
-	    VERBOSITY   => 0,
-	    BOOK        => undef,
-	    ERROR       => ''
+        FOUND       => 0,
+        VERBOSITY   => 0,
+        BOOK        => undef,
+        ERROR       => ''
     };
-	
+    
     bless ($self, $class);
-	return $self;
+    return $self;
 }
 
 sub found       { my $self = shift; return $self->_accessor('FOUND',@_)     }
@@ -35,14 +35,14 @@ sub book        { my $self = shift; return $self->_accessor('BOOK',@_)      }
 sub error       { my $self = shift; return $self->_accessor('ERROR',@_)     }
 
 sub _accessor {
-	my $self     = shift;
-	my $accessor = shift;
-	if (@_) { $self->{$accessor} = shift };
-	return $self->{$accessor};
+    my $self     = shift;
+    my $accessor = shift;
+    if (@_) { $self->{$accessor} = shift };
+    return $self->{$accessor};
 }
 
 sub search {
-	croak(q{Child class must overload 'search()' method.});
+    croak(q{Child class must overload 'search()' method.});
 }
 
 #----------------------------------------------------------------------------
@@ -50,16 +50,16 @@ sub search {
 
 # a generic method for storing the error & setting not found
 sub handler {
-	my $self = shift;
-	if (@_) {
-		$self->{ERROR} = shift;
-		print "Error: $self->{ERROR}\n"	if $self->verbosity;
-	};
-	return $self->found(0);
+    my $self = shift;
+    if (@_) {
+        $self->{ERROR} = shift;
+        print "Error: $self->{ERROR}\n"    if $self->verbosity;
+    };
+    return $self->found(0);
 }
 
 sub convert_to_ean13 {
-	my $self = shift;
+    my $self = shift;
     my $isbn = shift || return;
     my $prefix;
 
@@ -90,7 +90,7 @@ sub convert_to_ean13 {
 }
 
 sub convert_to_isbn10 {
-	my $self = shift;
+    my $self = shift;
     my $ean  = shift || return;
     my ($isbn,$isbn10);
 
@@ -104,7 +104,7 @@ sub convert_to_isbn10 {
         ($isbn,$isbn10) = ($1,$1);
     }
 
-	my ($csum, $pos, $digit) = (0, 0, 0);
+    my ($csum, $pos, $digit) = (0, 0, 0);
     for ($pos = 9; $pos > 0; $pos--) {
         $digit = $isbn % 10;
         $isbn /= 10;             # Decimal shift ISBN for next time 
@@ -116,7 +116,7 @@ sub convert_to_isbn10 {
 }
 
 sub is_valid {
-	my $self = shift;
+    my $self = shift;
     my $isbn = shift or return 0;
 
     # validate and convert into EAN13 format

@@ -9,9 +9,9 @@ our $VERSION = '1.04';
 # Public API
 
 sub new {
-	my $proto = shift;
-	my $class = ref($proto) || $proto;
-	my $self = {
+    my $proto = shift;
+    my $class = ref($proto) || $proto;
+    my $self = {
         ISBN        => undef,
         FOUND       => 0,
         FOUND_IN    => undef,
@@ -19,8 +19,8 @@ sub new {
         ERROR       => '',
     };
 
-	bless ($self, $class);
-	return $self;
+    bless ($self, $class);
+    return $self;
 }
 
 sub isbn        { my $self = shift; return $self->_accessor('ISBN',@_)     }
@@ -30,10 +30,10 @@ sub book        { my $self = shift; return $self->_accessor('BOOK',@_)     }
 sub error       { my $self = shift; return $self->_accessor('ERROR',@_)    }
 
 sub _accessor {
-	my $self     = shift;
-	my $accessor = shift;
-	if (@_) { $self->{$accessor} = shift };
-	return $self->{$accessor};
+    my $self     = shift;
+    my $accessor = shift;
+    if (@_) { $self->{$accessor} = shift };
+    return $self->{$accessor};
 }
 
 1;
@@ -59,9 +59,9 @@ search for it. This class does not know how to search on its own.
     print $record->isbn;
 
     if ($record->found) {
-	    print $record->found_in;
+        print $record->found_in;
     } else {
-	    print "not found";
+        print "not found";
     }
 
     $book = $record->book;
